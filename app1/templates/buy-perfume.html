@@ -1,0 +1,185 @@
+{% load static %}
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #fefefe;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 50px 5%;
+      background: #fff;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: 60vh;
+    }
+
+    .product-card {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product-info h3 {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .product-info p {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #a460f9;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .buttons button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .add-cart {
+      background: #a460f9;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .add-cart:hover {
+      background: #843ee5;
+    }
+
+    .fav-btn {
+      background: #eee;
+      color: #333;
+    }
+
+    .fav-btn:hover {
+      background: #ccc;
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff3c3c;
+      color: white;
+      font-size: 0.8rem;
+      padding: 5px 8px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 30px 3%;
+        gap: 20px;
+      }
+      
+      .product-card img {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+        padding: 20px 2%;
+        gap: 15px;
+      }
+      
+      .product-card img {
+        height: 220px;
+      }
+      
+      .product-info {
+        padding: 15px;
+      }
+      
+      .buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .buttons button {
+        width: 100%;
+      }
+    }
+  </style>
+
+
+  <!-- Header Component -->
+  {% include 'header.html' %}
+
+  <!-- Product Grid Section -->
+  <section class="product-grid">
+    {% for i in men_products %}
+    <div class="product-card">
+      <span class="offer-badge">20% OFF</span>
+      <img src="{{i.image.url}}" alt="{{i.name}}">
+      <div class="product-info">
+        <h3>{{i.name}}</h3>
+        <p>{{i.type}}</p>
+        <div class="price">Rs {{i.price}}</div>
+        <div class="buttons">
+          <a href="product_details/{{i.id}}"><button class="add-cart">Add to Cart</button></a>
+          <button class="fav-btn"><i class="fa fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- Footer Component -->
+  {% include 'footer.html' %}
+

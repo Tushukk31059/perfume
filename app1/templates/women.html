@@ -1,0 +1,644 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's Perfumes - INESSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style2.css' %}"/>
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fefefe;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      font-family: 'Playfair Display', serif;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .header-left a,
+    .header-right a {
+      margin: 0 0.75rem;
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .header-left a:hover,
+    .header-right a:hover {
+      color: #b08e6d;
+    }
+
+    .header-center {
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 2rem;
+      letter-spacing: 4px;
+      font-weight: bold;
+      color: #111;
+      margin: 0;
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      color: #b08e6d;
+      letter-spacing: 2px;
+      display: block;
+      margin-top: -6px;
+    }
+
+    .header-right i {
+      font-size: 1.2rem;
+      vertical-align: middle;
+      color: #444;
+      transition: color 0.3s ease;
+    }
+
+    .header-right i:hover {
+      color: #b08e6d;
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #444;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+
+    /* Discover Section */
+    .discover-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(40px, 6vw, 60px) clamp(20px, 5vw, 80px);
+      background-color: #fff;
+      min-height: 70vh;
+    }
+
+    .left-text1 {
+      width: min(100%, 500px);
+      padding: 0 clamp(20px, 4vw, 50px);
+      margin-bottom: 40px;
+    }
+
+    .right-images1 {
+      position: relative;
+      width: min(100%, 600px);
+      height: clamp(300px, 50vw, 500px);
+    }
+
+    .right-images1 .img1 {
+      width: clamp(150px, 30vw, 250px);
+      position: absolute;
+      left: 0;
+      top: clamp(30px, 8vw, 50px);
+      z-index: 2;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    .right-images1 .img2 {
+      width: clamp(200px, 40vw, 350px);
+      margin-left: clamp(80px, 20vw, 120px);
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .subheading1 {
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .left-text1 h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .description1 {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: #555;
+      margin: 30px 0;
+      max-width: 500px;
+      font-style: italic;
+    }
+
+    .discover {
+      background-color: black;
+      color: white;
+      padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .discover:hover {
+      background-color: #333;
+    }
+
+    /* Perfume Gallery */
+    .perfume-gallery {
+      padding: clamp(40px, 6vw, 60px) clamp(20px, 4vw, 40px);
+      background: #fff;
+      text-align: center;
+    }
+
+    .perfume-gallery h2 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      margin-bottom: 20px;
+      color: #111;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: clamp(20px, 4vw, 30px);
+      margin-top: 30px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .perfume-item {
+      background: #fafafa;
+      padding: clamp(15px, 3vw, 20px);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      position: relative;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .perfume-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .perfume-item img {
+      width: 100%;
+      height: clamp(200px, 30vw, 250px);
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #000;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+    }
+
+    .add-cart {
+      background-color: #000;
+      color: #fff;
+      padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
+      border: none;
+      border-radius: 25px;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: auto;
+    }
+
+    .add-cart:hover {
+      background-color: #333;
+    }
+
+    .favorite-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #ccc;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      cursor: pointer;
+      transition: color 0.3s ease;
+      z-index: 3;
+    }
+
+    .favorite-icon:hover {
+      color: red;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #000;
+      color: #fff;
+      padding: clamp(30px, 6vw, 50px) clamp(15px, 4vw, 20px) 20px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: clamp(20px, 4vw, 40px);
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-col h2.logo {
+      font-size: clamp(1.3rem, 3vw, 1.5rem);
+      margin-bottom: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .footer-col h2 .small {
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
+      font-weight: normal;
+    }
+
+    .footer-col h3 {
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .footer-col p, .footer-col li {
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
+      line-height: 1.6;
+      color: #ddd;
+      margin: 0 0 10px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col li:hover {
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      margin-top: 40px;
+      font-size: clamp(0.75rem, 2vw, 0.8rem);
+      color: #999;
+      max-width: 1200px;
+      margin: 40px auto 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .main-header {
+        padding: 1rem;
+      }
+      
+      .header-left a,
+      .header-right a {
+        margin: 0 0.5rem;
+        font-size: 0.95rem;
+      }
+      
+      .brand {
+        font-size: 1.8rem;
+      }
+      
+      .discover-section {
+        padding: 50px 40px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-header {
+        padding: 0.8rem 1rem;
+      }
+      
+      .header-container {
+        flex-wrap: wrap;
+        position: relative;
+      }
+      
+      .header-left {
+        order: 1;
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+      }
+      
+      .header-left.active {
+        display: flex;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+      }
+      
+      .header-left a {
+        margin: 0.5rem 0;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f5f5f5;
+        text-align: center;
+      }
+      
+      .header-left a:last-child {
+        border-bottom: none;
+      }
+      
+      .header-center {
+        order: 0;
+        flex: 1;
+        text-align: left;
+        margin-left: 1rem;
+      }
+      
+      .header-right {
+        order: 2;
+        display: flex;
+        align-items: center;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .header-right a:not(:first-child) {
+        display: none;
+      }
+      
+      .brand {
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+      }
+      
+      .tagline {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+      }
+      
+      .discover-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+      }
+      
+      .left-text1 {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+      
+      .right-images1 {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+      }
+      
+      .right-images1 .img1 {
+        position: relative;
+        width: 60%;
+        margin: 0 auto 20px;
+        top: 0;
+      }
+      
+      .right-images1 .img2 {
+        width: 80%;
+        margin: 0 auto;
+      }
+      
+      .perfume-gallery {
+        padding: 40px 20px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-header {
+        padding: 0.6rem 0.8rem;
+      }
+      
+      .brand {
+        font-size: 1.4rem;
+      }
+      
+      .tagline {
+        font-size: 0.7rem;
+      }
+      
+      .header-right i {
+        font-size: 1.1rem;
+      }
+      
+      .mobile-menu-btn {
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
+      }
+      
+      .discover-section {
+        padding: 30px 15px;
+      }
+      
+      .left-text1 h1 {
+        font-size: 2rem;
+      }
+      
+      .right-images1 {
+        min-height: 250px;
+      }
+      
+      .perfume-gallery {
+        padding: 30px 15px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .footer {
+        padding: 25px 15px 20px;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    /* Animation for mobile menu */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .header-left.active {
+      animation: slideDown 0.3s ease-out;
+    }
+
+    /* Favorite icon functionality */
+    .favorite-icon.active {
+      color: red;
+    }
+
+    /* Focus styles for accessibility */
+    .add-cart:focus,
+    .discover:focus {
+      outline: 2px solid #4B3FA3;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Component -->
+  {% include 'header.html' %}
+
+  <!-- Discover Section -->
+  <section class="discover-section">
+    <div class="left-text1">
+      <p class="subheading1">FOR HER</p>
+      <h1>Indulge in <br>opulent <br>aromas</h1>
+      <p class="description1">"Elevate your senses elegantly"</p>
+      <button class="discover">DISCOVER</button>
+    </div>
+    <div class="right-images1">
+      <img src="{% static 'bg-03.jpg' %}" class="img1" alt="Women's Fragrance">
+      <img src="{% static 'bg-05.jpg' %}" class="img2" alt="Perfume Bottle">
+    </div>
+  </section>
+
+  <!-- Perfume Gallery -->
+  <section class="perfume-gallery">
+    <h2>Explore Our Women's Collection</h2>
+    <div class="gallery-grid">
+      {% for i in women_products %}
+      <div class="perfume-item">
+        <i class="fa fa-heart favorite-icon"></i>
+        <img src="{{i.image.url}}" alt="{{i.name}}">
+        <div class="price">₹{{i.price}}</div>
+        <a href="product_details/{{i.id}}">
+          <button class="add-cart">Add to Cart</button>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Footer Component -->
+  {% include 'footer.html' %}
+
+  <script>
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const headerLeft = document.querySelector('.header-left');
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+          headerLeft.classList.toggle('active');
+          
+          // Change icon based on menu state
+          const icon = this.querySelector('i');
+          if (headerLeft.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.header-left a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            headerLeft.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          });
+        });
+      }
+
+      // Favorite icon functionality
+      const favoriteIcons = document.querySelectorAll('.favorite-icon');
+      favoriteIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+          this.classList.toggle('active');
+        });
+      });
+
+      // Smooth scroll for discover button
+      const discoverBtn = document.querySelector('.discover');
+      if (discoverBtn) {
+        discoverBtn.addEventListener('click', function() {
+          document.querySelector('.perfume-gallery').scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

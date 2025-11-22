@@ -1,0 +1,264 @@
+{% load static %}
+
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fefefe;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Checkout Container */
+    .checkout-container {
+      padding: clamp(30px, 5vw, 50px) clamp(15px, 5vw, 10%);
+      background: #fffaf7;
+      min-height: 70vh;
+    }
+
+    h1.checkout-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2rem);
+      color: #222;
+      text-align: center;
+      margin-bottom: clamp(20px, 4vw, 30px);
+    }
+
+    /* Checkout Form */
+    .checkout-form {
+      background: #fff;
+      padding: clamp(20px, 4vw, 30px);
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: clamp(15px, 3vw, 20px);
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #555;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+      width: 100%;
+      padding: clamp(10px, 2vw, 12px);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #a460f9;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: clamp(80px, 15vw, 100px);
+    }
+
+    .order-summary {
+      margin-top: 30px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .order-summary p {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .place-order-btn {
+      margin-top: 20px;
+      background: #a460f9;
+      color: white;
+      padding: clamp(12px, 2vw, 14px) clamp(20px, 4vw, 28px);
+      border: none;
+      border-radius: 30px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      cursor: pointer;
+      float: right;
+      transition: background 0.3s;
+      min-width: 140px;
+    }
+
+    .place-order-btn:hover {
+      background: #843ee5;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .checkout-form {
+        padding: 20px;
+      }
+      
+      .place-order-btn {
+        float: none;
+        width: 100%;
+        margin-top: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .checkout-container {
+        padding: 20px 10px;
+      }
+      
+      .checkout-form {
+        padding: 15px;
+      }
+    }
+
+    /* Form validation styles */
+    .form-group input:invalid,
+    .form-group textarea:invalid {
+      border-color: #ff6b6b;
+    }
+
+    .form-group input:valid,
+    .form-group textarea:valid {
+      border-color: #51cf66;
+    }
+
+    /* Focus styles for accessibility */
+    .place-order-btn:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid #a460f9;
+      outline-offset: 2px;
+    }
+
+    /* Loading state */
+    .place-order-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      position: relative;
+      color: transparent;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      margin-left: -10px;
+      margin-top: -10px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-right-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+
+  <!-- Header Component -->
+  {% include 'header.html' %}
+
+  <!-- Checkout Section -->
+  <div class="checkout-container">
+    <h1 class="checkout-title">Checkout</h1>
+
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="checkout-form">
+        <div class="form-group">
+          <label for="full_name">Full Name</label>
+          <input type="text" name="full_name" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" name="phone" required autocomplete="tel">
+        </div>
+
+        <div class="form-group">
+          <label for="address">Shipping Address</label>
+          <textarea name="address" required autocomplete="street-address"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="payment">Payment Method</label>
+          <select name="payment_method" required>
+            <option value="cod">Cash on Delivery</option>
+            <option value="online">Online Payment</option>
+          </select>
+        </div>
+
+        <!-- <div class="order-summary">
+          <p><strong>Total Items:</strong> {{ cart_items|length }}</p>
+          <p><strong>Total Amount:</strong> Rs {{ total_price }}</p>
+        </div> -->
+
+        <button type="submit" class="place-order-btn" id="place-order-btn">Place Order</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer Component -->
+  {% include 'footer.html' %}
+
+  <script>
+    // Form submission loading state
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkoutForm = document.querySelector('form');
+      const placeOrderBtn = document.getElementById('place-order-btn');
+      
+      if (checkoutForm && placeOrderBtn) {
+        checkoutForm.addEventListener('submit', function() {
+          placeOrderBtn.disabled = true;
+          placeOrderBtn.classList.add('loading');
+          placeOrderBtn.innerHTML = 'Placing Order...';
+        });
+      }
+
+      // Auto-fill user information if available
+      const userEmail = "{{ user.email }}";
+      const userName = "{{ user.get_full_name }}";
+      
+      if (userEmail && userEmail !== 'None') {
+        const emailField = document.querySelector('input[name="email"]');
+        if (emailField) emailField.value = userEmail;
+      }
+      
+      if (userName && userName !== 'None None') {
+        const nameField = document.querySelector('input[name="full_name"]');
+        if (nameField) nameField.value = userName;
+      }
+    });
+  </script>

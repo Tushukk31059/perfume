@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - INESSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fefefe;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Hero Banner */
+    .about-hero {
+      background: url('{% static "bg-11.jpg" %}') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .overlay-text {
+      color: white;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+
+    .overlay-text p {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .overlay-text h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin: 10px 0 0;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* About Text Section */
+    .about-section {
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 60px);
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #fff;
+    }
+
+    .about-section h4 {
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .about-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 20px;
+      line-height: 1.3;
+      color: #111;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .about-section p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Mission Section */
+    .mission-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 60px);
+      background: #fafafa;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .mission-text {
+      flex: 1 1 500px;
+      max-width: 600px;
+      padding-right: 20px;
+    }
+
+    .mission-text h4 {
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .mission-text h2 {
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+      margin-bottom: 20px;
+      color: #111;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .mission-text p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .mission-image {
+      flex: 1 1 400px;
+      max-width: 500px;
+      margin-top: 30px;
+    }
+
+    .mission-image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-hero {
+        height: 50vh;
+      }
+      
+      .mission-section {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+      
+      .about-section {
+        padding: 40px 20px;
+      }
+      
+      .mission-image {
+        margin-top: 30px;
+        order: 2;
+      }
+      
+      .mission-text {
+        padding-right: 0;
+        order: 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-hero {
+        height: 40vh;
+      }
+      
+      .overlay-text h1 {
+        font-size: 2rem;
+      }
+      
+      .about-section h2,
+      .mission-text h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+
+
+  <!-- Header Component -->
+  {% include 'header.html' %}
+
+  <!-- Hero Banner -->
+  <section class="about-hero">
+    <div class="overlay-text">
+      <p>A FEW WORDS</p>
+      <h1>ABOUT US</h1>
+    </div>
+  </section>
+
+  <!-- Who We Are -->
+  <section class="about-section">
+    <div class="text-container">
+      <h4>WHO WE ARE</h4>
+      <h2>WE ARE THE NY'S LARGEST SPECIALIST FRAGRANCE RETAILER WITH 20 STORES ACROSS THE USA & EUROPE.</h2>
+      <p>
+        Nunc vulputate feugiat tortor ac congue. Nam sit amet urna vitae ligula pellentesque porttitor ut id nisl.
+        Nam laoreet velit ipsum. Suspendisse ullamcorper, odio id faucibus consectetur, elit quam cursus est, nec
+        sagittis purus enim a eros. Sed posuere nec lacus sit amet ullamcorper. Donec ut egestas purus. Duis
+        placerat turpis non urna convallis convallis vitae nec odio.
+      </p>
+      <p>
+        Vestibulum quam turpis, blandit vel fermentum sed, pulvinar in risus. Etiam a mauris sed nunc venenatis
+        vulputate vitae quis tortor. Curabitur gravida accumsan elementum. Praesent ut hendrerit dui, vitae
+        elementum mi.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="mission-text">
+      <h4>WE ARE VISIONARIES</h4>
+      <h2>MISSION</h2>
+      <p>
+        Donec dapibus ullamcorper magna quis posuere. Aenean tincidunt posuere tellus nec dapibus. Aliquam pharetra
+        egestas tellus. Nulla sed quam ante. Curabitur porta pharetra nunc, in maximus ex ultricies a. Donec nibh
+        turpis, eleifend ut tristique ut, aliquam eu urna. Fusce eget ante tellus. Vestibulum.
+      </p>
+    </div>
+    <div class="mission-image">
+      <img src="{% static 'bg-15.jpg' %}" alt="Perfume Bottles">
+    </div>
+  </section>
+
+  <!-- Footer Component -->
+  {% include 'footer.html' %}
+
